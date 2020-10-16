@@ -4,14 +4,20 @@
     <meta charset="utf-8">
     <title>Demo</title>
 </head>
-<body>
-    <a href="http://jquery.com/">jQuery</a>
-    <button id="reorder" href="#">Reorder</button>
+<body>  
 
-    <button id="print" href="#">Print Groupings</button>
-
-    <br />
-
+<textarea id="names1">Mary
+Jorge
+frank
+sally</textarea>
+<textarea id="names2">bob
+Martha
+Reta
+Jimmy</textarea>
+<br />
+ <button id="createList" href="#">Create Lists</button>
+  
+<br />
 <select name="group1" id="group1" multiple>
   <option value="volvo">Volvo</option>
   <option value="saab">Saab</option>
@@ -25,6 +31,10 @@
   <option value="fred">Fred</option>
   <option value="john">John</option>
 </select>
+<br />
+    <button id="reorder" href="#">Reorder</button>
+<br />
+  <button id="print" href="#">Print Groupings</button>
 
 <textarea id="output"></textarea>
 
@@ -34,6 +44,35 @@
     // Your code goes here.
 $( document ).ready(function() {
  
+ 	$("button#createList").click(function (event) {
+        var names1 = $("#names1").val()  
+        var names2 = $("#names2").val()  
+
+        var name1Array = names1.split("\n");
+		$('#group1').children().remove(); 
+		console.log(name1Array)
+		for (var i = 0; i < name1Array.length ; i++) {
+        	$('#group1').append($('<option>', {
+      text: name1Array[i]}
+      		));
+        	
+        }
+        
+
+        var name2Array = names2.split("\n");
+		$('#group2').children().remove(); 
+		console.log(name2Array)
+		for (var i = 0; i < name2Array.length ; i++) {
+        	$('#group2').append($('<option>', {
+      text: name2Array[i]}
+      		));
+        	
+        }
+        
+
+ 	});
+
+
 	 $( "button#reorder" ).click(function( event ) {	
 	 	var group2 = $("#group2 > option")
 	 	var arrayTwo = [] 
