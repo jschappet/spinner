@@ -1,0 +1,12 @@
+{
+  "name": "spinner",
+  "version": "1.0.0",
+  "description": "spinner breakout room",
+  "main": "index.html",
+  "repository": "git@github.com:jschappet/spinner.git",
+  "author": "Jimmy Schappet <jschappet@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
+}

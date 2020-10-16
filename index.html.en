@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+</head>
+<body>
+    <a href="http://jquery.com/">jQuery</a>
+    <button id="reorder" href="#">Reorder</button>
+
+    <button id="print" href="#">Print Groupings</button>
+
+    <br />
+
+<select name="group1" id="group1" multiple>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+
+<select name="group2" id="group2" multiple>
+  <option value="sally">Sally</option>
+  <option value="mary">Mary</option>
+  <option value="fred">Fred</option>
+  <option value="john">John</option>
+</select>
+
+<textarea id="output"></textarea>
+
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+ 
+    // Your code goes here.
+$( document ).ready(function() {
+ 
+	 $( "button#reorder" ).click(function( event ) {	
+	 	var group2 = $("#group2 > option")
+	 	var arrayTwo = [] 
+	 	group2.each(function() {
+			arrayTwo.push($(this).text())
+    		//alert($(this).text() + ' ' + $(this).val());
+		});
+		$('#group2').children().remove(); 
+		for (var i = 1; i < arrayTwo.length ; i++) {
+        	$('#group2').append($('<option>', {
+      text: arrayTwo[i]}
+      		));
+        	
+        }
+        $('#group2').append($('<option>', {
+      		text: arrayTwo[0]}
+	 	)
+     );
+    });
+
+
+    $( "button#print" ).click(function( event ) {
+ 		console.log("")
+ 		var group1 = $("#group1 > option")
+		var group2 = $("#group2 > option")
+		
+		var arrayOne = [] 
+		var arrayTwo = [] 
+
+		group1.each(function() {
+			arrayOne.push($(this).text())
+    		//alert($(this).text() + ' ' + $(this).val());
+		});
+		group2.each(function() {
+			arrayTwo.push($(this).text())
+    		//alert($(this).text() + ' ' + $(this).val());
+		});
+        var outputText ="";
+        for (var i = 0; i < group1.length ; i++) {
+        	console.log( arrayOne[i] + " -- " + arrayTwo[i] )
+        	outputText = outputText + arrayOne[i] + " -- " + 
+        		arrayTwo[i] + "\n"
+        }
+        $("#output").val(outputText)  
+
+    });
+ 
+});
+    </script>
+</body>
+</html>
+
