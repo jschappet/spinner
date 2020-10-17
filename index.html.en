@@ -1,127 +1,183 @@
 <!doctype html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title>Demo</title>
-</head>
-<body>  
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<textarea id="names1">Mary
-Jorge
-frank
-sally</textarea>
-<textarea id="names2">bob
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="grid.css" rel="stylesheet">
+
+
+    <title>Hello, world!</title>
+  </head>
+  <body class="py-4">
+
+    <div class="container">
+
+  <h2 class="mt-4">Spinner Creation of Pairings</h2>
+  <p>Copy/Paste the two lists of participants into Group A & B</p>
+  <p>Click Reorder as needed. It takes the first name from the second list and moves it to the bottom.</p>
+  <p>Print Groupings, takes all the names and pairs them up.</p>
+  <p>Then you can copy/paste them into a Zoom chat window.
+</p>
+  <div class="row mb-3">
+    <div class="col-6 col-md-4 themed-grid-col">
+        <h2>Group A</h2>
+<textarea id="names1">Sally
 Martha
 Reta
+Jane</textarea>
+    </div>
+    <div class="col-6 col-md-4 themed-grid-col">
+
+        <h2>Group B</h2>
+        <textarea id="names2">Bob
+Joe
+Jorge
 Jimmy</textarea>
-<br />
- <button id="createList" href="#">Create Lists</button>
-  
-<br />
+    </div>
+    <div class="col-6 col-md-4 themed-grid-col">
+        <button id="createList" href="#">Create Lists</button>
+    </div>
+  </div>
+
+
+  <div class="row mb-3">
+    <div class="col-6 col-md-4 themed-grid-col">
 <select name="group1" id="group1" multiple>
   <option value="volvo">Volvo</option>
   <option value="saab">Saab</option>
   <option value="opel">Opel</option>
   <option value="audi">Audi</option>
 </select>
-
-<select name="group2" id="group2" multiple>
+    </div>
+    <div class="col-6 col-md-4 themed-grid-col">
+        <select name="group2" id="group2" multiple>
   <option value="sally">Sally</option>
   <option value="mary">Mary</option>
   <option value="fred">Fred</option>
   <option value="john">John</option>
 </select>
-<br />
-    <button id="reorder" href="#">Reorder</button>
+    </div>
+    <div class="col-6 col-md-4 themed-grid-col">
+        <button id="reorder" href="#">Reorder</button>
 <br />
   <button id="print" href="#">Print Groupings</button>
+    </div>
+  </div>
 
-<textarea id="output"></textarea>
 
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <div class="row mb-3">
+    <div class="col-6 themed-grid-col">
+        <span id="output"></span>
+        
+    </div>
+    <div class="col-6 themed-grid-col">Thank you!</div>
+  </div>
+
+
+
+   <!-- <script src="./node_modules/jquery/dist/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+
     <script>
  
     // Your code goes here.
 $( document ).ready(function() {
  
- 	$("button#createList").click(function (event) {
+    $("button#createList").click(function (event) {
         var names1 = $("#names1").val()  
         var names2 = $("#names2").val()  
 
         var name1Array = names1.split("\n");
-		$('#group1').children().remove(); 
-		console.log(name1Array)
-		for (var i = 0; i < name1Array.length ; i++) {
-        	$('#group1').append($('<option>', {
+        $('#group1').children().remove(); 
+        console.log(name1Array)
+        for (var i = 0; i < name1Array.length ; i++) {
+            $('#group1').append($('<option>', {
       text: name1Array[i]}
-      		));
-        	
+            ));
+            
         }
         
 
         var name2Array = names2.split("\n");
-		$('#group2').children().remove(); 
-		console.log(name2Array)
-		for (var i = 0; i < name2Array.length ; i++) {
-        	$('#group2').append($('<option>', {
+        $('#group2').children().remove(); 
+        console.log(name2Array)
+        for (var i = 0; i < name2Array.length ; i++) {
+            $('#group2').append($('<option>', {
       text: name2Array[i]}
-      		));
-        	
+            ));
+            
         }
         
 
- 	});
+    });
 
 
-	 $( "button#reorder" ).click(function( event ) {	
-	 	var group2 = $("#group2 > option")
-	 	var arrayTwo = [] 
-	 	group2.each(function() {
-			arrayTwo.push($(this).text())
-    		//alert($(this).text() + ' ' + $(this).val());
-		});
-		$('#group2').children().remove(); 
-		for (var i = 1; i < arrayTwo.length ; i++) {
-        	$('#group2').append($('<option>', {
+     $( "button#reorder" ).click(function( event ) {    
+        var group2 = $("#group2 > option")
+        var arrayTwo = [] 
+        group2.each(function() {
+            arrayTwo.push($(this).text())
+            //alert($(this).text() + ' ' + $(this).val());
+        });
+        $('#group2').children().remove(); 
+        for (var i = 1; i < arrayTwo.length ; i++) {
+            $('#group2').append($('<option>', {
       text: arrayTwo[i]}
-      		));
-        	
+            ));
+            
         }
         $('#group2').append($('<option>', {
-      		text: arrayTwo[0]}
-	 	)
+            text: arrayTwo[0]}
+        )
      );
     });
 
 
     $( "button#print" ).click(function( event ) {
- 		console.log("")
- 		var group1 = $("#group1 > option")
-		var group2 = $("#group2 > option")
-		
-		var arrayOne = [] 
-		var arrayTwo = [] 
+        console.log("")
+        var group1 = $("#group1 > option")
+        var group2 = $("#group2 > option")
+        
+        var arrayOne = [] 
+        var arrayTwo = [] 
 
-		group1.each(function() {
-			arrayOne.push($(this).text())
-    		//alert($(this).text() + ' ' + $(this).val());
-		});
-		group2.each(function() {
-			arrayTwo.push($(this).text())
-    		//alert($(this).text() + ' ' + $(this).val());
-		});
+        group1.each(function() {
+            arrayOne.push($(this).text())
+            //alert($(this).text() + ' ' + $(this).val());
+        });
+        group2.each(function() {
+            arrayTwo.push($(this).text())
+            //alert($(this).text() + ' ' + $(this).val());
+        });
         var outputText ="";
         for (var i = 0; i < group1.length ; i++) {
-        	console.log( arrayOne[i] + " -- " + arrayTwo[i] )
-        	outputText = outputText + arrayOne[i] + " -- " + 
-        		arrayTwo[i] + "\n"
+            console.log( arrayOne[i] + " -- " + arrayTwo[i] )
+            outputText = outputText + arrayOne[i] + " -- " + 
+                arrayTwo[i] + "<br />\n"
         }
-        $("#output").val(outputText)  
+        $("#output").html(outputText)  
 
     });
  
 });
     </script>
-</body>
-</html>
 
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+ 
+    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+</div>
+  </body>
+</html>
